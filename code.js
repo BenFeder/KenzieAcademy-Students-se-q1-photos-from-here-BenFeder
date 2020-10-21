@@ -1,44 +1,74 @@
-let success = function (position) {
-  console.log(position);
+let options = {
+  enableHighAccuracy: true,
+  maximumAge: 0,
 };
 
-let errorMessage = function () {
-  window.alert("Could not access your location!");
-  currentPosition.coords.latitude; // = New York City latitutde coord
-  currentPosition.coords.longitude; // = New York City longitutde coord
-};
+const fallbackLocation = { latitude: 40.712776, longitude: -74.005974 }; // New York City
 
-let currentPosition = navigator.geolocation.watchPosition(
-  success,
-  errorMessage
+function constructImageURL(photoObj) {
+  return (
+    // https://live.staticflickr.com/{server-id}/{id}_{secret}_{size-suffix}.jpg
+    "https://live.staticflickr.com/" +
+    photoObj.server +
+    "/" +
+    photoObj.id +
+    "_" +
+    photoObj.secret +
+    ".jpg"
+  );
+}
+
+function displayPhotos(data) {
+  let image = document.createElement("img");
+  image.setAttribute("src", constructImageURL(data.photos.photo[0]));
+  document.body.append(image);
+}
+
+function nextPhoto(data) {
+  let image2 = document.createElement("img");
+  image2.setAttribute("src", constructImageURL(data.photos.photo[1]));
+  document.body.append(image2);
+}
+
+let progressButton = document.createElement("button");
+progressButton.innerText = "Next Photo";
+progressButton.addEventListener("click", nextPhoto);
+document.body.append(progressButton);
+
+function processResponse(response) {
+  let responsePromise = response.json();
+  responsePromise.then(displayPhotos);
+}
+
+function retrievePhotos(coords) {
+  let fetchPromise = fetch(
+    "https://shrouded-mountain-15003.herokuapp.com/https://flickr.com/services/rest/?api_key=c13bb7597944dc9db081eac7bccc6ad1&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=" +
+      coords.latitude +
+      "&lon=" +
+      coords.longitude
+  );
+
+  fetchPromise.then(processResponse);
+}
+
+function success(pos) {
+  console.log(pos);
+}
+
+function useCurrentPosition(pos) {
+  retrievePhotos(pos.coords);
+}
+
+function useFallbackPosition() {
+  retrievePhotos(fallbackLocation);
+}
+
+function error(errorMessage) {
+  console.log(errorMessage);
+}
+
+navigator.geolocation.getCurrentPosition(
+  useCurrentPosition,
+  useFallbackPosition,
+  options
 );
-
-let latPosition = currentPosition.coords.latitude;
-let longPosition = currentPosition.coords.longitude;
-
-// Flickr API key: c13bb7597944dc9db081eac7bccc6ad1
-// Flickr Secret: fc35bde7caa46965
-
-fetch(
-  `https://shrouded-mountain-15003.herokuapp.com/https://flickr.com/services/rest/?api_key=c13bb7597944dc9db081eac7bccc6ad1&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=` +
-    latPosition +
-    `&lon=` +
-    longPosition +
-    `&text=dog`
-)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (dataObject) {
-    console.log(dataObject);
-    dataObject.forEach(function (url) {
-      let image = document.createElement("img");
-      image.append(url);
-      document.body.append(img);
-    });
-  });
-
-function progressImage() {}
-
-let progressionButton = document.createElement("button");
-progressionButton.addEventListener("click", progressImage);
