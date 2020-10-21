@@ -45,7 +45,8 @@ function retrievePhotos(coords) {
     "https://shrouded-mountain-15003.herokuapp.com/https://flickr.com/services/rest/?api_key=c13bb7597944dc9db081eac7bccc6ad1&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=" +
       coords.latitude +
       "&lon=" +
-      coords.longitude
+      coords.longitude +
+      "&text=trees"
   );
 
   fetchPromise.then(processResponse);
