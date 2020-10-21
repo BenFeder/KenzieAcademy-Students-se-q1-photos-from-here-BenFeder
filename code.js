@@ -1,10 +1,3 @@
-let options = {
-  enableHighAccuracy: true,
-  maximumAge: 0,
-};
-
-const fallbackLocation = { latitude: 40.712776, longitude: -74.005974 }; // New York City
-
 function constructImageURL(photoObj) {
   return (
     // https://live.staticflickr.com/{server-id}/{id}_{secret}_{size-suffix}.jpg
@@ -20,19 +13,25 @@ function constructImageURL(photoObj) {
 
 function displayPhotos(data) {
   let image = document.createElement("img");
-  image.setAttribute("src", constructImageURL(data.photos.photo[0]));
+  if (image.src == "") {
+    image.setAttribute("src", constructImageURL(data.photos.photo[0]));
+  } else if (image.src == constructImageURL(data.photos.photo[0])) {
+    imagesetAttribute("src", constructImageURL(data.photos.photo[1]));
+  } else if (image.src == constructImageURL(data.photos.photo[1])) {
+    imagesetAttribute("src", constructImageURL(data.photos.photo[2]));
+  } else if (image.src == constructImageURL(data.photos.photo[2])) {
+    imagesetAttribute("src", constructImageURL(data.photos.photo[3]));
+  } else if (image.src == constructImageURL(data.photos.photo[3])) {
+    imagesetAttribute("src", constructImageURL(data.photos.photo[4]));
+  } else if (image.src == constructImageURL(data.photos.photo[4])) {
+    imagesetAttribute("src", constructImageURL(data.photos.photo[0]));
+  }
   document.body.append(image);
-}
-
-function nextPhoto(data) {
-  let image2 = document.createElement("img");
-  image2.setAttribute("src", constructImageURL(data.photos.photo[1]));
-  document.body.append(image2);
 }
 
 let progressButton = document.createElement("button");
 progressButton.innerText = "Next Photo";
-progressButton.addEventListener("click", nextPhoto);
+progressButton.addEventListener("click", displayPhotos);
 document.body.append(progressButton);
 
 function processResponse(response) {
@@ -51,10 +50,12 @@ function retrievePhotos(coords) {
 
   fetchPromise.then(processResponse);
 }
+let options = {
+  enableHighAccuracy: true,
+  maximumAge: 0,
+};
 
-function success(pos) {
-  console.log(pos);
-}
+let fallbackLocation = { latitude: 40.712776, longitude: -74.005974 }; // New York City
 
 function useCurrentPosition(pos) {
   retrievePhotos(pos.coords);
@@ -64,12 +65,10 @@ function useFallbackPosition() {
   retrievePhotos(fallbackLocation);
 }
 
-function error(errorMessage) {
-  console.log(errorMessage);
-}
-
 navigator.geolocation.getCurrentPosition(
   useCurrentPosition,
   useFallbackPosition,
   options
 );
+
+// demo from Randy Cox helped guide me
