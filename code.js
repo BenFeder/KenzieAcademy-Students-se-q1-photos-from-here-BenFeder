@@ -35,27 +35,54 @@ function processResponse(response) {
   responsePromise.then(displayPhotos);
 }
 
+function displayPhotos(data) {
+  for (let img = 0; img < data.photos.photo.length; img++) {
+    if (img == 0) {
+      let image0 = document.createElement("img");
+      image0.setAttribute("src", constructImageURL(data.photos.photo[img]));
+      document.body.append(image0);
+    } else if (img == 1) {
+      let image1 = document.createElement("img");
+      image1.setAttribute("src", constructImageURL(data.photos.photo[img]));
+      // document.body.appendChild(image1);
+    } else if (img == 2) {
+      let image2 = document.createElement("img");
+      image2.setAttribute("src", constructImageURL(data.photos.photo[img]));
+      // document.body.appendChild(image2);
+    } else if (img == 3) {
+      let image3 = document.createElement("img");
+      image3.setAttribute("src", constructImageURL(data.photos.photo[img]));
+      // document.body.appendChild(image3);
+    } else if (img == 4) {
+      let image4 = document.createElement("img");
+      image4.setAttribute("src", constructImageURL(data.photos.photo[img]));
+      // document.body.appendChild(image4);
+    }
+  }
+}
+
 let progressButton = document.createElement("button");
 progressButton.innerText = "Next Photo";
-progressButton.addEventListener("click", displayPhotos);
+progressButton.addEventListener("click", nextPhoto);
 document.body.append(progressButton);
 
-function displayPhotos(data) {
-  let image = document.createElement("img");
-  if (image.src == "") {
-    image.setAttribute("src", constructImageURL(data.photos.photo[0]));
-  } else if (image.src == constructImageURL(data.photos.photo[0])) {
-    imagesetAttribute("src", constructImageURL(data.photos.photo[1]));
-  } else if (image.src == constructImageURL(data.photos.photo[1])) {
-    imagesetAttribute("src", constructImageURL(data.photos.photo[2]));
-  } else if (image.src == constructImageURL(data.photos.photo[2])) {
-    imagesetAttribute("src", constructImageURL(data.photos.photo[3]));
-  } else if (image.src == constructImageURL(data.photos.photo[3])) {
-    imagesetAttribute("src", constructImageURL(data.photos.photo[4]));
-  } else if (image.src == constructImageURL(data.photos.photo[4])) {
-    imagesetAttribute("src", constructImageURL(data.photos.photo[0]));
+// THIS FUNCTION DOES NOT EXECUTE AS EXPECTED, images 0-4 ARE NOT DEFINED
+function nextPhoto() {
+  if (document.body.firstChild == image0) {
+    document.body.appendChild(image1);
   }
-  document.body.append(image);
+  if (document.body.firstChild == image1) {
+    document.body.appendChild(image2);
+  }
+  if (document.body.firstChild == image2) {
+    document.body.appendChild(image3);
+  }
+  if (document.body.firstChild == image3) {
+    document.body.appendChild(image4);
+  }
+  if (document.body.firstChild == image4) {
+    document.body.appendChild(image0);
+  }
 }
 
 function constructImageURL(photoObj) {
