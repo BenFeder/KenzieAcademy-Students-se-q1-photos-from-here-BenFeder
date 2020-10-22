@@ -44,19 +44,19 @@ function displayPhotos(data) {
     } else if (img == 1) {
       let image1 = document.createElement("img");
       image1.setAttribute("src", constructImageURL(data.photos.photo[img]));
-      // document.body.appendChild(image1);
+      // document.body.append(image1);
     } else if (img == 2) {
       let image2 = document.createElement("img");
       image2.setAttribute("src", constructImageURL(data.photos.photo[img]));
-      // document.body.appendChild(image2);
+      // document.body.append(image2);
     } else if (img == 3) {
       let image3 = document.createElement("img");
       image3.setAttribute("src", constructImageURL(data.photos.photo[img]));
-      // document.body.appendChild(image3);
+      // document.body.append(image3);
     } else if (img == 4) {
       let image4 = document.createElement("img");
       image4.setAttribute("src", constructImageURL(data.photos.photo[img]));
-      // document.body.appendChild(image4);
+      // document.body.append(image4);
     }
   }
 }
@@ -68,20 +68,20 @@ document.body.append(progressButton);
 
 // THIS FUNCTION DOES NOT EXECUTE AS EXPECTED, images 0-4 ARE NOT DEFINED
 function nextPhoto() {
-  if (document.body.firstChild == image0) {
-    document.body.appendChild(image1);
+  if (document.body.lastElementChild == image0) {
+    document.body.append(image1);
   }
-  if (document.body.firstChild == image1) {
-    document.body.appendChild(image2);
+  if (document.body.lastElementChild == image1) {
+    document.body.append(image2);
   }
-  if (document.body.firstChild == image2) {
-    document.body.appendChild(image3);
+  if (document.body.lastElementChild == image2) {
+    document.body.append(image3);
   }
-  if (document.body.firstChild == image3) {
-    document.body.appendChild(image4);
+  if (document.body.lastElementChild == image3) {
+    document.body.append(image4);
   }
-  if (document.body.firstChild == image4) {
-    document.body.appendChild(image0);
+  if (document.body.lastElementChild == image4) {
+    document.body.append(image0);
   }
 }
 
