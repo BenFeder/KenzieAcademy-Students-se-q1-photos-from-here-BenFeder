@@ -1,3 +1,13 @@
-image {
+img {
   width: 500px;
+}
+
+button {
+  display: flex;
+  margin: 5px;
+}
+
+h4 {
+  font-weight: normal;
+  margin: 0;
 }

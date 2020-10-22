@@ -41,22 +41,42 @@ function displayPhotos(data) {
       let image0 = document.createElement("img");
       image0.setAttribute("src", constructImageURL(data.photos.photo[img]));
       document.body.append(image0);
+
+      let image0Text = document.createElement("h4");
+      image0Text.innerText = image0.src;
+      document.body.append(image0Text);
     } else if (img == 1) {
       let image1 = document.createElement("img");
       image1.setAttribute("src", constructImageURL(data.photos.photo[img]));
       // document.body.append(image1);
+
+      let image1Text = document.createElement("h4");
+      image1Text.innerText = image1.src;
+      // document.body.append(image1Text);
     } else if (img == 2) {
       let image2 = document.createElement("img");
       image2.setAttribute("src", constructImageURL(data.photos.photo[img]));
       // document.body.append(image2);
+
+      let image2Text = document.createElement("h4");
+      image2Text.innerText = image2.src;
+      // document.body.append(image2Text);
     } else if (img == 3) {
       let image3 = document.createElement("img");
       image3.setAttribute("src", constructImageURL(data.photos.photo[img]));
       // document.body.append(image3);
+
+      let image3Text = document.createElement("h4");
+      image3Text.innerText = image3.src;
+      // document.body.append(image3Text);
     } else if (img == 4) {
       let image4 = document.createElement("img");
       image4.setAttribute("src", constructImageURL(data.photos.photo[img]));
       // document.body.append(image4);
+
+      let image4Text = document.createElement("h4");
+      image4Text.innerText = image4.src;
+      // document.body.append(image4Text);
     }
   }
 }
