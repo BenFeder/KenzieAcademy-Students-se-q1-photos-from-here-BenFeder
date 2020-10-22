@@ -87,21 +87,27 @@ progressButton.addEventListener("click", nextPhoto);
 document.body.append(progressButton);
 
 // THIS FUNCTION DOES NOT EXECUTE AS EXPECTED, images 0-4 ARE NOT DEFINED
+// ...and image0Text-image4Text would append after each other
 function nextPhoto() {
   if (document.body.lastElementChild == image0) {
     image0.append(image1);
+    document.body.append(image1Text);
   }
   if (document.body.lastElementChild == image1) {
     image1.append(image2);
+    document.body.append(image2Text);
   }
   if (document.body.lastElementChild == image2) {
     image2.append(image3);
+    document.body.append(image3Text);
   }
   if (document.body.lastElementChild == image3) {
     image3.append(image4);
+    document.body.append(image4Text);
   }
   if (document.body.lastElementChild == image4) {
     image4.append(image0);
+    document.body.append(image0Text);
   }
 }
 
