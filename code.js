@@ -69,19 +69,19 @@ document.body.append(progressButton);
 // THIS FUNCTION DOES NOT EXECUTE AS EXPECTED, images 0-4 ARE NOT DEFINED
 function nextPhoto() {
   if (document.body.lastElementChild == image0) {
-    document.body.append(image1);
+    image0.append(image1);
   }
   if (document.body.lastElementChild == image1) {
-    document.body.append(image2);
+    image1.append(image2);
   }
   if (document.body.lastElementChild == image2) {
-    document.body.append(image3);
+    image2.append(image3);
   }
   if (document.body.lastElementChild == image3) {
-    document.body.append(image4);
+    image3.append(image4);
   }
   if (document.body.lastElementChild == image4) {
-    document.body.append(image0);
+    image4.append(image0);
   }
 }
 
